@@ -1,0 +1,25 @@
+<div class="landing d-flex flex-column justify-content-center align-items-center text-center">
+    <h1 class="display-4 fw-bold text-light">Üdvözöl a PikkyPad!</h1>
+    <p class="text-light">Tanulás és szórakozás játékosan 3-9 éves gyerekeknek.</p>
+    <div class="mt-4">
+      <button class="btn btn-light me-2" (click)="openLogin()">Bejelentkezés</button>
+      <button class="btn btn-outline-light" (click)="openRegister()">Regisztráció</button>
+    </div>
+  </div>
+  
+  <!-- LOGIN MODAL -->
+  <ng-template [ngIf]="showLogin">
+    <div class="modal-backdrop" (click)="closeModals()"></div>
+    <div class="modal-box">
+      <app-login></app-login>
+    </div>
+  </ng-template>
+  
+  <!-- REGISTER MODAL -->
+  <ng-template [ngIf]="showRegister">
+    <div class="modal-backdrop" (click)="closeModals()"></div>
+    <div class="modal-box">
+      <app-register></app-register>
+    </div>
+  </ng-template>
+  
