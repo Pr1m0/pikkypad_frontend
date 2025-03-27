@@ -1,17 +1,27 @@
 <div class="container mt-4">
-    <h2 class="mb-3">Gyermekeid</h2>
+    <h2 class="mb-3">Gyermekek</h2>
+  
+    <form [formGroup]="childForm" (ngSubmit)="onSubmit()" class="mb-4">
+      <div class="row g-2 align-items-center">
+        <div class="col-md-4">
+          <input type="text" class="form-control" placeholder="Név" formControlName="name">
+        </div>
+        <div class="col-md-2">
+          <input type="number" class="form-control" placeholder="Kor" formControlName="age">
+        </div>
+        <div class="col-md-auto">
+          <button class="btn btn-success" type="submit">{{ editId ? 'Módosít' : 'Hozzáadás' }}</button>
+        </div>
+      </div>
+    </form>
   
     <div class="row">
-      <div class="col-md-4" *ngFor="let child of children">
-        <div class="card mb-3 shadow-sm">
-          <div class="card-body text-center">
-            <img src="https://via.placeholder.com/100" class="rounded-circle mb-3" alt="Profilkép">
-            <h5 class="card-title">{{ child.name }}</h5>
-            <p class="card-text">Kor: {{ child.age }} év</p>
-            <button class="btn btn-primary btn-sm me-2">Módosítás</button>
-            <button class="btn btn-danger btn-sm" (click)="deleteChild(child.id)">Törlés</button>
-          </div>
-        </div>
+      <div class="col-md-4 mb-3" *ngFor="let child of children">
+        <app-child-card 
+          [child]="child" 
+          (edit)="editChild($event)" 
+          (delete)="deleteChild($event)">
+        </app-child-card>
       </div>
     </div>
   </div>

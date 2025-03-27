@@ -1,9 +1,37 @@
-<div class="card">
+ <!-- <div class="card">
     <img src="assets/default-avatar.png" class="card-img-top" alt="Profilkép">
     <div class="card-body">
       <h5 class="card-title">{{ child.name }}</h5>
       <p class="card-text">Kor: {{ child.age }}</p>
+      <p class="card-text text-muted">Szülő: {{ child.user?.name || 'Ismeretlen' }}</p>
       <button class="btn btn-outline-primary btn-sm">Szerkesztés</button>
+    </div>
+  </div>
+    -->
+   <!-- <div class="card shadow-sm text-center h-100">
+    <img src="https://via.placeholder.com/150" class="card-img-top rounded-circle mx-auto mt-3" style="width: 100px;" alt="Profilkép">
+    <div class="card-body">
+      <h5 class="card-title">{{ child.name }}</h5>
+      <p class="card-text">Kor: {{ child.age }}</p>
+      
+    </div>
+    <div class="card-footer bg-transparent d-flex justify-content-around">
+      <button class="btn btn-sm btn-outline-primary">Szerkesztés</button>
+      <button class="btn btn-sm btn-outline-danger">Törlés</button>
+    </div>
+  </div>
+   -->
+   <div class="card shadow-sm text-center h-100">
+    <img src="https://via.placeholder.com/150" class="card-img-top rounded-circle mx-auto mt-3" style="width: 100px;" alt="Profilkép">
+  
+    <div class="card-body">
+      <h5 class="card-title">{{ child.name }}</h5>
+      <p class="card-text">Kor: {{ child.age }} év</p>
+    </div>
+  
+    <div class="card-footer bg-transparent d-flex justify-content-around">
+      <button class="btn btn-sm btn-outline-primary" (click)="edit.emit(child)">Szerkesztés</button>
+      <button class="btn btn-sm btn-outline-danger" (click)="delete.emit(child.id)">Törlés</button>
     </div>
   </div>
   

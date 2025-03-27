@@ -1,8 +1,45 @@
-.landing {
-    height: 100vh;
+/* Alapbeállítás */
+
+  
+  /* Navbar */
+  .navbar {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Hero szekció (Landing) */
+  .landing {
+    min-height: 100vh;
+    background: linear-gradient(to right, #79c7ff, #a1ffce);
+    padding-top: 120px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Általános szekciók */
+  .section-block {
+    padding: 5rem 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Háttérszínek */
+  .bg-light {
+    background: linear-gradient(to left, #79c7ff, #a1ffce);
+  }
+  
+  .bg-white {
     background: linear-gradient(to right, #79c7ff, #a1ffce);
   }
   
+  .bg-primary {
+    background-color: #b7f00c !important;
+  }
+  
+  /* Modal stílus */
   .modal-backdrop {
     position: fixed;
     inset: 0;
@@ -21,7 +58,27 @@
     border-radius: 8px;
     width: 90%;
     max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   }
-   
   
+  /* Footer */
+  footer {
+    font-size: 0.9rem;
+    padding: 1.5rem 0;
+    margin-top: 0;
+    background: linear-gradient(to right, #7F7FD5, #86A8E7, #91EAE4);
+    color: #fff;
+    text-align: center;
+  }
+  
+  /* Utolsó szakasz és footer összehangolása */
+  .section-block:last-of-type {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  
+  /* Gombok */
+  button.btn {
+    min-width: 120px;
+  }
   
