@@ -22,7 +22,7 @@
   </div>
    -->
    <div class="card shadow-sm text-center h-100">
-    <img src="https://via.placeholder.com/150" class="card-img-top rounded-circle mx-auto mt-3" style="width: 100px;" alt="Profilkép">
+    <img src="img/dog avatar.jpg" class="card-img-top rounded-circle mx-auto mt-3" style="width: 100px;" alt="Profilkép">
   
     <div class="card-body">
       <h5 class="card-title">{{ child.name }}</h5>
@@ -33,5 +33,7 @@
       <button class="btn btn-sm btn-outline-primary" (click)="edit.emit(child)">Szerkesztés</button>
       <button class="btn btn-sm btn-outline-danger" (click)="delete.emit(child.id)">Törlés</button>
     </div>
+    <a [routerLink]="['/memorygame']" [queryParams]="{ gameId: 1 }" class="btn btn-sm btn-info">Memória játék</a>
+
   </div>
   
