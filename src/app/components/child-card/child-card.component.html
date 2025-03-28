@@ -9,8 +9,15 @@
     <div class="card-footer bg-transparent d-flex justify-content-around">
       <button class="btn btn-sm btn-outline-primary" (click)="edit.emit(child)">Szerkesztés</button>
       <button class="btn btn-sm btn-outline-danger" (click)="delete.emit(child.id)">Törlés</button>
+      <button
+      [routerLink]="['/child-play']"
+      [queryParams]="{ childId: child.id }"
+      class="btn btn-sm btn-info"
+    >
+      Játék indítása
+    </button>
     </div>
-    <a [routerLink]="['/memorygame']" [queryParams]="{ gameId: 1 }" class="btn btn-sm btn-info">Memória játék</a>
+   
 
   </div>
   

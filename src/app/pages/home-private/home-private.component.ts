@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { ChildService } from '../../services/child.service';
 import { HttpClient } from '@angular/common/http';
+import { ChildCardComponent } from "../../components/child-card/child-card.component";
+import { ChildDashboardComponent } from "../child-dashboard/child-dashboard.component";
 
 @Component({
   selector: 'app-home-private',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ChildCardComponent, ChildDashboardComponent],
   templateUrl: './home-private.component.html',
   styleUrl: './home-private.component.css'
 })
