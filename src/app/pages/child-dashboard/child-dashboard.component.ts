@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChildService } from '../../services/child.service';
-import { ChildCardComponent } from '../../components/child-card/child-card.component';
 import { GameService } from '../../services/game.service';
+import { ChildCardComponent } from '../../components/child-card/child-card.component';
 
 @Component({
   selector: 'app-child-dashboard',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ChildCardComponent,FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, ChildCardComponent],
   templateUrl: './child-dashboard.component.html',
   styleUrl: './child-dashboard.component.css'
 })
@@ -17,14 +17,14 @@ export class ChildDashboardComponent implements OnInit {
   games: any[] = [];
   childForm!: FormGroup;
   editId: number | null = null;
-  selectedChildId: number | null = null;
-  selectedGameId: number | null = null;
+
+  selectedChildForGame: { [gameId: number]: number | null } = {}; // minden játékhoz egy gyermek
 
   constructor(
     private fb: FormBuilder,
-     private childService: ChildService,
-     private gameService: GameService
-    ) {}
+    private childService: ChildService,
+    private gameService: GameService
+  ) {}
 
   ngOnInit() {
     this.childForm = this.fb.group({
@@ -38,10 +38,11 @@ export class ChildDashboardComponent implements OnInit {
 
   loadChildren() {
     this.childService.getChildren().subscribe({
-      next: (res: any) => (this.children = res.data),
+      next: (res: any) => this.children = res.data,
       error: (err) => console.error('Hiba a gyermekek lekérdezésekor:', err)
     });
   }
+
   loadGames() {
     this.gameService.getGames().subscribe({
       next: (res: any) => this.games = res.data,
@@ -88,16 +89,18 @@ export class ChildDashboardComponent implements OnInit {
       age: child.age
     });
   }
-  assignGameToChild() {
-    if (this.selectedChildId && this.selectedGameId) {
-      this.gameService.assignGameToChild(this.selectedChildId, this.selectedGameId).subscribe({
+
+  assignGameToChild(gameId: number, childId: number | null) {
+    if (childId) {
+      this.gameService.assignGameToChild(childId, gameId).subscribe({
         next: () => {
           alert('Játék sikeresen hozzárendelve a gyermekhez!');
-          this.selectedChildId = null;
-          this.selectedGameId = null;
+          this.selectedChildForGame[gameId] = null;
         },
         error: (err) => console.error('Hozzárendelés sikertelen:', err)
       });
+    } else {
+      alert('Kérlek válassz ki egy gyermeket!');
     }
   }
 }

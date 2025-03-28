@@ -1,27 +1,23 @@
 <div class="container mt-4">
     <h2 class="mb-3">Gyermekek</h2>
   
+    <!-- Gyermek hozzáadás form -->
     <form [formGroup]="childForm" (ngSubmit)="onSubmit()" class="mb-4">
       <div class="row g-2 align-items-center">
-        <!-- Név mező -->
         <div class="col-md-4">
           <input type="text" class="form-control" placeholder="Név" formControlName="name" />
           <div *ngIf="childForm.get('name')?.touched && childForm.get('name')?.invalid" class="text-danger small mt-1">
             A név megadása kötelező.
           </div>
         </div>
-  
-        <!-- Kor mező -->
         <div class="col-md-2">
           <input type="number" class="form-control" placeholder="Kor (3-9)" formControlName="age" min="3" max="9" />
           <div *ngIf="childForm.get('age')?.touched && childForm.get('age')?.invalid" class="text-danger small mt-1">
             <div *ngIf="childForm.get('age')?.errors?.['required']">A kor megadása kötelező.</div>
-            <div *ngIf="childForm.get('age')?.errors?.['min']">A minimális kor 3 év.</div>
-            <div *ngIf="childForm.get('age')?.errors?.['max']">A maximális kor 9 év.</div>
+            <div *ngIf="childForm.get('age')?.errors?.['min']">Min. életkor: 3 év.</div>
+            <div *ngIf="childForm.get('age')?.errors?.['max']">Max. életkor: 9 év.</div>
           </div>
         </div>
-  
-        <!-- Gomb -->
         <div class="col-md-auto">
           <button class="btn btn-success" type="submit">{{ editId ? 'Módosít' : 'Hozzáadás' }}</button>
         </div>
@@ -29,7 +25,7 @@
     </form>
   
     <!-- Gyermek kártyák -->
-    <div class="row">
+    <div class="row mb-5">
       <div class="col-md-4 mb-3" *ngFor="let child of children">
         <app-child-card
           [child]="child"
@@ -38,24 +34,26 @@
         </app-child-card>
       </div>
     </div>
-    <h3>Játék hozzárendelése gyermekhez</h3>
-<div class="row mb-4">
-  <div class="col-md-5">
-    <label>Gyermek kiválasztása:</label>
-    <select class="form-select" [(ngModel)]="selectedChildId">
-      <option *ngFor="let child of children" [value]="child.id">{{ child.name }}</option>
-    </select>
-  </div>
-  <div class="col-md-5">
-    <label>Játék kiválasztása:</label>
-    <select class="form-select" [(ngModel)]="selectedGameId">
-      <option *ngFor="let game of games" [value]="game.id">{{ game.title }}</option>
-    </select>
-  </div>
-  <div class="col-md-2 d-flex align-items-end">
-    <button class="btn btn-primary w-100" (click)="assignGameToChild()">Hozzáadás</button>
-  </div>
   
-</div>
+    <!-- Játék lista kártyákkal -->
+    <h3 class="mb-3">Játékok</h3>
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let game of games">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ game.title }}</h5>
+            <p class="card-text">{{ game.description }}</p>
+            <span class="badge bg-info">{{ game.category }}</span>
+          </div>
+          <div class="card-footer text-center">
+            <select class="form-select mb-2" [(ngModel)]="selectedChildForGame[game.id]" name="childSelect-{{ game.id }}">
+              <option [ngValue]="null" disabled selected>Gyermek kiválasztása</option>
+              <option *ngFor="let child of children" [ngValue]="child.id">{{ child.name }}</option>
+            </select>
+            <button class="btn btn-primary btn-sm" (click)="assignGameToChild(game.id, selectedChildForGame[game.id])">Hozzáadás</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   
