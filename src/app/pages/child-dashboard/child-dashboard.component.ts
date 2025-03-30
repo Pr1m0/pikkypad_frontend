@@ -96,6 +96,7 @@ export class ChildDashboardComponent implements OnInit {
         next: () => {
           alert('Játék sikeresen hozzárendelve a gyermekhez!');
           this.selectedChildForGame[gameId] = null;
+          this.loadChildren();
         },
         error: (err) => console.error('Hozzárendelés sikertelen:', err)
       });

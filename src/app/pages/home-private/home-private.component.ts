@@ -27,8 +27,10 @@ export class HomePrivateComponent implements OnInit {
     this.childService.getChildren().subscribe({
       next: (res: any) => {
         this.children = res.data;
-        if (res.data.length > 0) {
-          this.parentName = res.data[0].user.name; // 👈 ha backend küldi a szülő nevét is
+        if (res.data.length > 0 && res.data[0].user?.name) {
+          this.parentName = res.data[0].user.name;
+        } else {
+          this.parentName = 'Szülő'; 
         }
       },
       error: (err) => {
