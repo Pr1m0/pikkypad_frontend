@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ChildService } from '../../services/child.service';
 import { GameService } from '../../services/game.service';
 import { ChildCardComponent } from '../../components/child-card/child-card.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-child-dashboard',
@@ -18,12 +19,13 @@ export class ChildDashboardComponent implements OnInit {
   childForm!: FormGroup;
   editId: number | null = null;
 
-  selectedChildForGame: { [gameId: number]: number | null } = {}; // minden játékhoz egy gyermek
+  selectedChildForGame: { [gameId: number]: number | null } = {};
 
   constructor(
     private fb: FormBuilder,
     private childService: ChildService,
-    private gameService: GameService
+    private gameService: GameService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -39,14 +41,14 @@ export class ChildDashboardComponent implements OnInit {
   loadChildren() {
     this.childService.getChildren().subscribe({
       next: (res: any) => this.children = res.data,
-      error: (err) => console.error('Hiba a gyermekek lekérdezésekor:', err)
+      error: () => this.toastr.error('Nem sikerült betölteni a gyermekeket.')
     });
   }
 
   loadGames() {
     this.gameService.getGames().subscribe({
       next: (res: any) => this.games = res.data,
-      error: (err) => console.error('Hiba a játékok betöltésekor:', err)
+      error: () => this.toastr.error('Nem sikerült betölteni a játékokat.')
     });
   }
 
@@ -59,16 +61,18 @@ export class ChildDashboardComponent implements OnInit {
           this.loadChildren();
           this.childForm.reset();
           this.editId = null;
+          this.toastr.success('Gyermek sikeresen frissítve!');
         },
-        error: (err) => console.error('Frissítés sikertelen:', err)
+        error: () => this.toastr.error('Frissítés sikertelen.')
       });
     } else {
       this.childService.addChild(this.childForm.value).subscribe({
         next: () => {
           this.loadChildren();
           this.childForm.reset();
+          this.toastr.success('Gyermek sikeresen hozzáadva!');
         },
-        error: (err) => console.error('Hozzáadás sikertelen:', err)
+        error: () => this.toastr.error('Hozzáadás sikertelen.')
       });
     }
   }
@@ -76,8 +80,11 @@ export class ChildDashboardComponent implements OnInit {
   deleteChild(id: number) {
     if (confirm('Biztosan törlöd?')) {
       this.childService.deleteChild(id).subscribe({
-        next: () => this.loadChildren(),
-        error: (err) => console.error('Törlés sikertelen:', err)
+        next: () => {
+          this.loadChildren();
+          this.toastr.success('Gyermek törölve.');
+        },
+        error: () => this.toastr.error('Törlés sikertelen.')
       });
     }
   }
@@ -94,27 +101,25 @@ export class ChildDashboardComponent implements OnInit {
     if (childId) {
       this.gameService.assignGameToChild(childId, gameId).subscribe({
         next: () => {
-          alert('Játék sikeresen hozzárendelve a gyermekhez!');
+          this.toastr.success('Játék sikeresen hozzárendelve!');
           this.selectedChildForGame[gameId] = null;
           this.loadChildren();
         },
-        error: (err) => console.error('Hozzárendelés sikertelen:', err)
+        error: () => this.toastr.error('Hozzárendelés sikertelen.')
       });
     } else {
-      alert('Kérlek válassz ki egy gyermeket!');
+      this.toastr.warning('Kérlek válassz ki egy gyermeket!');
     }
   }
+
   removeGameFromChild(data: { childId: number; gameId: number }) {
     if (confirm('Biztosan törlöd a játékot a gyermektől?')) {
       this.gameService.removeGameFromChild(data.childId, data.gameId).subscribe({
         next: () => {
-          // Frissítjük a gyerekek listáját
           this.loadChildren();
+          this.toastr.success('Játék eltávolítva.');
         },
-        error: (err) => {
-          console.error('Játék törlése sikertelen:', err);
-          alert('Hiba történt a törlés közben!');
-        }
+        error: () => this.toastr.error('Hiba történt a törlés közben.')
       });
     }
   }

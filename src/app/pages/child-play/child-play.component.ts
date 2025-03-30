@@ -5,6 +5,7 @@ import { GameService } from '../../services/game.service';
 import { MemoryGameComponent } from '../../games/memory-game/memory-game.component';
 import { ColoringGameComponent } from '../../games/coloring-game/coloring-game.component';
 import { PuzzleGameComponent } from '../../games/puzzle-game/puzzle-game.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-child-play',
@@ -22,7 +23,8 @@ export class ChildPlayComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -35,10 +37,17 @@ export class ChildPlayComponent implements OnInit {
     this.gameService.getGamesForChild(childId).subscribe({
       next: (res: any) => {
         this.games = res.data;
-        this.startTimer();
-        console.log('Lekért játékok:', this.games);
+        if (!this.games.length) {
+          this.toastr.info('Nincs játék hozzárendelve a gyermekhez.');
+        } else {
+          this.startTimer();
+          console.log('Lekért játékok:', this.games);
+        }
       },
-      error: (err) => console.error('Nem sikerült betölteni a játékokat:', err)
+      error: (err) => {
+        console.error('Nem sikerült betölteni a játékokat:', err);
+        this.toastr.error('Nem sikerült betölteni a játékokat.');
+      }
     });
   }
 
@@ -49,11 +58,13 @@ export class ChildPlayComponent implements OnInit {
   isMemoryGame() {
     return this.currentGame?.title === 'Memória játék';
   }
+
   isColoringGame() {
-    return this.currentGame?.title === 'Színező játék'; 
+    return this.currentGame?.title === 'Színező játék';
   }
+
   isPuzzleGame() {
-    return this.currentGame?.title === 'Puzzle játék'; 
+    return this.currentGame?.title === 'Puzzle játék';
   }
 
   nextGame() {
@@ -66,8 +77,13 @@ export class ChildPlayComponent implements OnInit {
 
   startTimer() {
     this.intervalId = setInterval(() => {
-      if (this.timer > 0) this.timer--;
-      else this.router.navigate(['/home-private']);
+      if (this.timer > 0) {
+        this.timer--;
+      } else {
+        clearInterval(this.intervalId);
+        this.toastr.info('Lejárt az idő!');
+        this.router.navigate(['/home-private']);
+      }
     }, 1000);
   }
 
