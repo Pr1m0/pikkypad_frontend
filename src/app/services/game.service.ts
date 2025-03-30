@@ -52,4 +52,11 @@ export class GameService {
       }
     });
   }
+  removeGameFromChild(childId: number, gameId: number) {
+    return this.http.delete(`${this.apiUrl}/children/${childId}/games/${gameId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+  }
 }

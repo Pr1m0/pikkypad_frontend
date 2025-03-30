@@ -37,7 +37,7 @@ export class ChildGamesComponent implements OnInit {
   }
 
   startGame(gameId: number) {
-    this.router.navigate(['/memorygame'], {
+    this.router.navigate(['/child-play'], {
       queryParams: {
         childId: this.childId,
         gameId: gameId

@@ -1,0 +1,50 @@
+<div class="color-palette">
+    <div
+      *ngFor="let color of colors"
+      class="color-dot"
+      [ngStyle]="{ 'background-color': color }"
+      (click)="selectedColor = color"
+    ></div>
+  </div>
+  
+  <svg
+    viewBox="0 0 300 150"
+    xmlns="http://www.w3.org/2000/svg"
+    class="coloring-svg"
+  >
+    <!-- Nap -->
+    <circle
+      id="sun"
+      cx="50"
+      cy="50"
+      r="30"
+      stroke="black"
+      stroke-width="2"
+      [attr.fill]="selectedColors['sun'] || '#ffffff'"
+      (click)="onColorClick('sun')"
+    ></circle>
+  
+    <!-- Cica (háromszög fejecske) -->
+    <polygon
+      id="cat"
+      points="120,80 100,120 140,120"
+      stroke="black"
+      stroke-width="2"
+      [attr.fill]="selectedColors['cat'] || '#ffffff'"
+      (click)="onColorClick('cat')"
+    ></polygon>
+  
+    <!-- Kutya (egyszerű négyzet fejecske) -->
+    <rect
+      id="dog"
+      x="200"
+      y="80"
+      width="40"
+      height="40"
+      stroke="black"
+      stroke-width="2"
+      [attr.fill]="selectedColors['dog'] || '#ffffff'"
+      (click)="onColorClick('dog')"
+    ></rect>
+  </svg>
+  

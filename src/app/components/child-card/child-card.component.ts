@@ -13,4 +13,6 @@ export class ChildCardComponent {
   @Input() child: any;
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<number>();
+  @Output() removeGame = new EventEmitter<{ childId: number, gameId: number }>();
+
 }

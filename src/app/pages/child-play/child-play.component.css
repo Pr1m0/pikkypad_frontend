@@ -1,0 +1,38 @@
+/* Teljes képernyő */
+.play-screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f8ff;
+  }
+  
+  /* Fejléc */
+  .play-header {
+    padding: 1rem 2rem;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+  }
+  
+  /* Játék terület */
+  .play-body {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    position: relative;
+  }
+  
+  /* Navigációs gombok alul */
+  .play-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-top: 1px solid #ddd;
+  }
+  

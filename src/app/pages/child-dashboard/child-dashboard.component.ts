@@ -103,4 +103,18 @@ export class ChildDashboardComponent implements OnInit {
       alert('Kérlek válassz ki egy gyermeket!');
     }
   }
+  removeGameFromChild(data: { childId: number; gameId: number }) {
+    if (confirm('Biztosan törlöd a játékot a gyermektől?')) {
+      this.gameService.removeGameFromChild(data.childId, data.gameId).subscribe({
+        next: () => {
+          // Frissítjük a gyerekek listáját
+          this.loadChildren();
+        },
+        error: (err) => {
+          console.error('Játék törlése sikertelen:', err);
+          alert('Hiba történt a törlés közben!');
+        }
+      });
+    }
+  }
 }

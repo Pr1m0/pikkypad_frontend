@@ -30,7 +30,8 @@
         <app-child-card
           [child]="child"
           (edit)="editChild($event)"
-          (delete)="deleteChild($event)">
+          (delete)="deleteChild($event)"
+          (removeGame)="removeGameFromChild($event)">
         </app-child-card>
       </div>
     </div>

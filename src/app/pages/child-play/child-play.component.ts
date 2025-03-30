@@ -1,35 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from '../../services/game.service';
+import { MemoryGameComponent } from '../../games/memory-game/memory-game.component';
+import { ColoringGameComponent } from '../../games/coloring-game/coloring-game.component';
+import { PuzzleGameComponent } from '../../games/puzzle-game/puzzle-game.component';
 
 @Component({
   selector: 'app-child-play',
   standalone: true,
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule, MemoryGameComponent, ColoringGameComponent, PuzzleGameComponent],
   templateUrl: './child-play.component.html',
   styleUrl: './child-play.component.css'
 })
 export class ChildPlayComponent implements OnInit {
   games: any[] = [];
   currentGameIndex = 0;
-  timer: number = 60 * 60; // 1 óra
+  timer: number = 60 * 60;
   intervalId: any;
 
-  constructor(private route: ActivatedRoute, private gameService: GameService, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private gameService: GameService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     const childId = Number(this.route.snapshot.queryParamMap.get('childId'));
-
     if (!childId) {
       this.router.navigate(['/home-private']);
       return;
     }
 
     this.gameService.getGamesForChild(childId).subscribe({
-      next: (res:any) => {
+      next: (res: any) => {
         this.games = res.data;
         this.startTimer();
+        console.log('Lekért játékok:', this.games);
       },
       error: (err) => console.error('Nem sikerült betölteni a játékokat:', err)
     });
@@ -37,6 +44,16 @@ export class ChildPlayComponent implements OnInit {
 
   get currentGame() {
     return this.games[this.currentGameIndex];
+  }
+
+  isMemoryGame() {
+    return this.currentGame?.title === 'Memória játék';
+  }
+  isColoringGame() {
+    return this.currentGame?.title === 'Színező játék'; 
+  }
+  isPuzzleGame() {
+    return this.currentGame?.title === 'Puzzle játék'; 
   }
 
   nextGame() {

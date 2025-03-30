@@ -1,0 +1,60 @@
+.puzzle-game {
+    text-align: center;
+   
+    padding: 10px;
+  }
+  
+  .puzzle-container {
+    position: relative;
+    margin: 20px auto;
+    border: 2px solid #000;
+    touch-action: none;
+  }
+  
+  .puzzle-piece {
+    position: absolute;
+    background-size: cover;
+    cursor: grab;
+    border: 1px solid #ccc;
+    transition: box-shadow 0.2s ease;
+  }
+  
+  .puzzle-piece:active {
+    cursor: grabbing;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .button-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  
+  button {
+    padding: 10px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 400px) {
+    .puzzle-container {
+      transform: scale(0.9);
+    }
+  
+    button {
+      font-size: 14px;
+      padding: 8px 12px;
+    }
+  }
+  
