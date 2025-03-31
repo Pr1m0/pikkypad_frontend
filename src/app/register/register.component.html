@@ -4,42 +4,34 @@
 
 <div class="modal-body">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    
     <div class="mb-3">
       <label>Név</label>
-      <input type="text" class="form-control" formControlName="name">
+      <input type="text" class="form-control" formControlName="name" placeholder="pl: Kiss Péter">
       <div *ngIf="errorMessages.name" class="text-danger mt-1">
         <div *ngFor="let msg of errorMessages.name">{{ msg }}</div>
       </div>
     </div>
-
     <div class="mb-3">
       <label>Email</label>
-      <input type="email" class="form-control" formControlName="email">
+      <input type="email" class="form-control" formControlName="email" placeholder="pl: pelda@email.hu">
       <div *ngIf="errorMessages.email" class="text-danger mt-1">
         <div *ngFor="let msg of errorMessages.email">{{ msg }}</div>
       </div>
     </div>
-
     <div class="mb-3">
       <label>Jelszó</label>
-      <input type="password" class="form-control" formControlName="password">
+      <input type="password" class="form-control" formControlName="password" placeholder="Min. 8 karakter, kis- és nagybetű, szám, speciális karakter">
       <div *ngIf="errorMessages.password" class="text-danger mt-1">
         <div *ngFor="let msg of errorMessages.password">{{ msg }}</div>
       </div>
     </div>
-
     <div class="mb-3">
       <label>Jelszó ismét</label>
-      <input type="password" class="form-control" formControlName="confirm_password">
+      <input type="password" class="form-control" formControlName="confirm_password" placeholder="Ismételd meg a jelszót">
       <div *ngIf="errorMessages.confirm_password" class="text-danger mt-1">
         <div *ngFor="let msg of errorMessages.confirm_password">{{ msg }}</div>
       </div>
     </div>
-    <div *ngIf="errorMessages.name">
-      <div *ngFor="let msg of errorMessages.name">{{ msg }}</div>
-    </div>
     <button type="submit" class="btn btn-success">Regisztráció</button>
   </form>
- 
 </div>

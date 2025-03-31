@@ -23,4 +23,12 @@ export class AuthService {
       }
     });
   }
+  getCurrentUser() {
+    return this.http.get(`${this.apiUrl}/user`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+  }
+  
 }

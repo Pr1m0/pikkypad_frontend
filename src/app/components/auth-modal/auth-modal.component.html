@@ -1,39 +1,32 @@
 <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-  
-        <div class="modal-header">
-          <h5 class="modal-title">{{ activeTab === 'login' ? 'Bejelentkezés' : 'Regisztráció' }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-  
-        <div class="modal-body">
-          <!-- TABOK -->
-          <ul class="nav nav-tabs mb-3">
-            <li class="nav-item">
-              <button class="nav-link" [class.active]="activeTab === 'login'" (click)="activeTab = 'login'">Bejelentkezés</button>
-            </li>
-            <li class="nav-item">
-              <button class="nav-link" [class.active]="activeTab === 'register'" (click)="activeTab = 'register'">Regisztráció</button>
-            </li>
-          </ul>
-  
-          <!-- FORMOK -->
-          <form *ngIf="activeTab === 'login'" [formGroup]="loginForm" (ngSubmit)="onLogin()">
-            <input type="text" class="form-control mb-2" placeholder="Felhasználónév" formControlName="name">
-            <input type="password" class="form-control mb-3" placeholder="Jelszó" formControlName="password">
-            <button class="btn btn-primary w-100">Bejelentkezés</button>
-          </form>
-  
-          <form *ngIf="activeTab === 'register'" [formGroup]="registerForm" (ngSubmit)="onRegister()">
-            <input type="text" class="form-control mb-2" placeholder="Név" formControlName="name">
-            <input type="email" class="form-control mb-2" placeholder="Email" formControlName="email">
-            <input type="password" class="form-control mb-3" placeholder="Jelszó" formControlName="password">
-            <button class="btn btn-success w-100">Regisztráció</button>
-          </form>
-        </div>
-  
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">{{ activeTab === 'login' ? 'Bejelentkezés' : 'Regisztráció' }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-tabs mb-3">
+          <li class="nav-item">
+            <button class="nav-link" [class.active]="activeTab === 'login'" (click)="activeTab = 'login'">Bejelentkezés</button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" [class.active]="activeTab === 'register'" (click)="activeTab = 'register'">Regisztráció</button>
+          </li>
+        </ul>
+
+        <form *ngIf="activeTab === 'login'" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <input type="text" class="form-control mb-2" placeholder="Felhasználónév" formControlName="name">
+          <input type="password" class="form-control mb-3" placeholder="Jelszó" formControlName="password">
+          <button class="btn btn-primary w-100">Bejelentkezés</button>
+        </form>
+
+        <!-- Regisztráció külön komponensben (nem kell bezárás, csak redirect) -->
+        <app-register *ngIf="activeTab === 'register'"></app-register>
+      </div>
+
     </div>
   </div>
-  
+</div>

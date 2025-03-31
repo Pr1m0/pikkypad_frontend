@@ -1,12 +1,25 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="mb-3">
     <label for="email">Email</label>
-    <input formControlName="email" type="email" class="form-control" />
+    <input
+      formControlName="email"
+      type="email"
+      class="form-control"
+      placeholder="pl: pelda@email.hu"
+    />
   </div>
 
   <div class="mb-3">
     <label for="password">Jelszó</label>
-    <input formControlName="password" type="password" class="form-control" />
+    <input
+      formControlName="password"
+      type="password"
+      class="form-control"
+      placeholder="Jelszó"
+    />
+    <small class="form-text text-muted">
+      A jelszót a regisztráció során megadott módon írd be.
+    </small>
   </div>
 
   <button type="submit" class="btn btn-primary">Bejelentkezés</button>

@@ -9,7 +9,6 @@ export class GameService {
 
   constructor(private http: HttpClient) {}
 
-  // Játékok lekérdezése
   getGames() {
     return this.http.get(`${this.apiUrl}/games`, {
       headers: {
@@ -18,7 +17,6 @@ export class GameService {
     });
   }
 
-  // Játék hozzárendelése gyermekhez
   assignGameToChild(childId: number, gameId: number) {
     return this.http.post(`${this.apiUrl}/children/${childId}/games`, 
       { game_id: gameId },
@@ -30,7 +28,6 @@ export class GameService {
     );
   }
 
-  // Statisztika mentése játékhoz
   saveGameStat(childId: number, gameId: number, duration: number) {
     return this.http.post(`${this.apiUrl}/statistics`, 
       {
@@ -59,4 +56,22 @@ export class GameService {
       }
     });
   }
+  addGame(data: any) {
+    return this.http.post(`${this.apiUrl}/games`, data, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    });
+  }
+  
+  updateGame(id: number, data: any) {
+    return this.http.put(`${this.apiUrl}/games/${id}`, data, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    });
+  }
+  
+  deleteGame(id: number) {
+    return this.http.delete(`${this.apiUrl}/games/${id}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    });
+  }
+  
 }

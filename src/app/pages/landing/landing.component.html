@@ -1,35 +1,34 @@
- <ng-template [ngIf]="showLogin">
-    <div class="modal-backdrop" (click)="closeModals()"></div>
-    <div class="modal-box">
-      <app-login></app-login>
+<ng-template [ngIf]="showLogin">
+  <div class="modal-backdrop" (click)="closeModals()"></div>
+  <div class="modal-box">
+    <app-login></app-login>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="showRegister">
+  <div class="modal-backdrop" (click)="closeModals()"></div>
+  <div class="modal-box">
+    <app-register (close)="closeModals()"></app-register>
+  </div>
+</ng-template>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: linear-gradient(90deg, #7F7FD5, #86A8E7, #91EAE4);">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">PikkyPad</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link text-white" href="#about">Rólunk</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#why">Miért</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#contact">Kapcsolat</a></li>
+        <li class="nav-item"><button class="btn btn-light btn-sm me-2" (click)="openLogin()">Bejelentkezés</button></li>
+        <li class="nav-item"><button class="btn btn-outline-light btn-sm" (click)="openRegister()">Regisztráció</button></li>
+      </ul>
     </div>
-  </ng-template>
-  
-  <ng-template [ngIf]="showRegister">
-    <div class="modal-backdrop" (click)="closeModals()"></div>
-    <div class="modal-box">
-      <app-register></app-register>
-    </div>
-  </ng-template>
-   
-   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: linear-gradient(90deg, #7F7FD5, #86A8E7, #91EAE4);">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">PikkyPad</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link text-white" href="#about">Rólunk</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#why">Miért</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#contact">Kapcsolat</a></li>
-          <li class="nav-item"><button class="btn btn-light btn-sm me-2" (click)="openLogin()">Bejelentkezés</button></li>
-          <li class="nav-item"><button class="btn btn-outline-light btn-sm" (click)="openRegister()">Regisztráció</button></li>
-        </ul>
-      </div>
-    </div>
-  </nav> 
-  
+  </div>
+</nav>
    <div class="landing d-flex flex-column justify-content-center align-items-center text-center">
     <h1 class="display-4 fw-bold text-light">Üdvözöl a PikkyPad!</h1>
     <p class="text-light">Tanulás és szórakozás játékosan 3-9 éves gyerekeknek.</p>

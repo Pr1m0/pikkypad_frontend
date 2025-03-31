@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+  
+  th {
+    background-color: #3498db;
+    color: white;
+    text-align: left;
+    padding: 10px;
+  }
+  
+  td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  tr:hover {
+    background-color: #f4f4f4;
+  }

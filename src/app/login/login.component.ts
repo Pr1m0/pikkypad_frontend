@@ -29,12 +29,26 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.form.valid) {
-     
       this.auth.login(this.form.value).subscribe({
         next: (res: any) => {
           localStorage.setItem('token', res.data.token);
-          this.toastr.success('Sikeres bejelentkezés!');
-          this.router.navigate(['/home-private']);
+  
+          this.auth.getCurrentUser().subscribe({
+            next: (user: any) => {
+              this.toastr.success('Sikeres bejelentkezés!');
+  
+              if (user.role === 'admin' || user.role === 'superadmin') {
+                this.router.navigate(['/admin/users']);
+              } else {
+                this.router.navigate(['/home-private']);
+              }
+            },
+            error: (err) => {
+              console.error('Nem sikerült lekérni a felhasználót:', err);
+              this.toastr.error('Bejelentkezés sikerült, de a navigáció hibás.');
+              this.router.navigate(['/home-private']);
+            }
+          });
         },
         error: (err) => {
           console.error('Bejelentkezési hiba:', err);

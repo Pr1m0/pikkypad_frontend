@@ -1,0 +1,21 @@
+ 
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <h3>Admin panel</h3>
+      <nav>
+        <a routerLink="/admin/users">👥 Felhasználók</a>
+        <a routerLink="/admin/games">🎮 Játékok</a>
+        <a routerLink="/admin/children">👶 Gyermekek</a>
+      </nav>
+      <div class="admin-clock">
+        📅 {{ currentDate }} <br> 🕒 {{ currentTime }} <br>
+        <button class="btn btn-secondary mt-3" (click)="logout()">
+          Kijelentkezés
+        </button>
+      </div>
+    </aside>
+  
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>

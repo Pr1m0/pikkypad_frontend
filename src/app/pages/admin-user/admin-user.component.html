@@ -1,0 +1,27 @@
+<div class="admin-user">
+    <h2>Felhasználók kezelése</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Név</th>
+          <th>Email</th>
+          <th>Szerep</th>
+          <th>Műveletek</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary" (click)="promoteUser(user.id)">Adminná léptetés</button>
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteUser(user.id)">Törlés</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

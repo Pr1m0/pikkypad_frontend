@@ -1,0 +1,35 @@
+<div class="admin-game">
+    <h2>Játékok kezelése</h2>
+  
+    <form [formGroup]="gameForm" (ngSubmit)="onSubmit()">
+      <input type="text" formControlName="title" placeholder="Játék címe">
+      <input type="text" formControlName="category" placeholder="Kategória">
+      <textarea formControlName="description" placeholder="Leírás (opcionális)"></textarea>
+  
+      <button class="btn btn-sm btn-outline-primary" type="submit">{{ editId ? 'Frissítés' : 'Hozzáadás' }}</button>
+      <button type="button" (click)="resetForm()" *ngIf="editId">Mégse</button>
+    </form>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cím</th>
+          <th>Kategória</th>
+          <th>Műveletek</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let game of games">
+          <td>{{ game.id }}</td>
+          <td>{{ game.title }}</td>
+          <td>{{ game.category }}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary" (click)="editGame(game)">Szerkesztés</button>
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteGame(game.id)">Törlés</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
