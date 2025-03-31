@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule, Router, RouterLink } from '@angular/router';
 import { ChildService } from '../../services/child.service';
 import { HttpClient } from '@angular/common/http';
 import { ChildCardComponent } from '../../components/child-card/child-card.component';

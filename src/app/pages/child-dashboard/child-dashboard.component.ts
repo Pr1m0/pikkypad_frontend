@@ -5,11 +5,12 @@ import { ChildService } from '../../services/child.service';
 import { GameService } from '../../services/game.service';
 import { ChildCardComponent } from '../../components/child-card/child-card.component';
 import { ToastrService } from 'ngx-toastr';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-child-dashboard',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, ChildCardComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, ChildCardComponent,RouterModule],
   templateUrl: './child-dashboard.component.html',
   styleUrl: './child-dashboard.component.css'
 })
