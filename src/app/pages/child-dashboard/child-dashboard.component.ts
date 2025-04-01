@@ -31,7 +31,7 @@ export class ChildDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.childForm = this.fb.group({
-      name: ['', [Validators.required]],
+      name: ['', [Validators.required,Validators.pattern(/^[\p{L}\s]+$/u)]],
       age: ['', [Validators.required, Validators.min(3), Validators.max(9)]]
     });
 
