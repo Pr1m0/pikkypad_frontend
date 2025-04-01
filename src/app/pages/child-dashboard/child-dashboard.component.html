@@ -48,23 +48,24 @@
   
     <!-- Játék lista kártyákkal -->
     <h3 class="mb-3">Játékok</h3>
-    <div class="row">
-      <div class="col-md-4 mb-4" *ngFor="let game of games">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">{{ game.title }}</h5>
-            <p class="card-text">{{ game.description }}</p>
-            <span class="badge bg-info">{{ game.category }}</span>
-          </div>
-          <div class="card-footer text-center">
-            <select class="form-select mb-2" [(ngModel)]="selectedChildForGame[game.id]" name="childSelect-{{ game.id }}">
-              <option [ngValue]="null" disabled selected>Gyermek kiválasztása</option>
-              <option *ngFor="let child of children" [ngValue]="child.id">{{ child.name }}</option>
-            </select>
-            <button class="btn btn-primary btn-sm" (click)="assignGameToChild(game.id, selectedChildForGame[game.id])">Hozzáadás</button>
-          </div>
-        </div>
+<div class="row">
+  <div class="col-md-4 mb-4" *ngFor="let game of games">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">{{ game.title }}</h5>
+        <p class="card-text">{{ game.description }}</p>
+        <span class="badge bg-info">{{ game.category }}</span>
+      </div>
+      <div class="card-footer text-center">
+        <select class="form-select mb-2" [(ngModel)]="selectedChildForGame[game.id]" name="childSelect-{{ game.id }}">
+          <option [ngValue]="null">Gyermek kiválasztása</option>
+          <option *ngFor="let child of children" [ngValue]="child.id">{{ child.name }}</option>
+        </select>
+        <button class="btn btn-primary btn-sm" (click)="assignGameToChild(game.id, selectedChildForGame[game.id])">
+          Hozzáadás
+        </button>
       </div>
     </div>
   </div>
+</div>
   

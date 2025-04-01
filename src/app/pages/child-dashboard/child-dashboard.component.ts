@@ -48,7 +48,12 @@ export class ChildDashboardComponent implements OnInit {
 
   loadGames() {
     this.gameService.getGames().subscribe({
-      next: (res: any) => this.games = res.data,
+      next: (res: any) => {
+        this.games = res.data;
+        this.games.forEach(game => {
+          this.selectedChildForGame[game.id] = null;
+        });
+      },
       error: () => this.toastr.error('Nem sikerült betölteni a játékokat.')
     });
   }
