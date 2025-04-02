@@ -5,7 +5,9 @@
       <div>
         <a class="btn btn-outline-primary me-2" routerLink="/home-private">Főoldal</a>
         <a class="btn btn-outline-primary me-2" routerLink="/child-dashboard">Gyermekek</a>
-        <a class="btn btn-outline-danger" routerLink="/">Kijelentkezés</a>
+        <button class="btn btn-outline-danger" (click)="logout()">
+          Kijelentkezés
+        </button>
       </div>
     </div>
   </nav>

@@ -5,12 +5,13 @@ import { ChildService } from '../../services/child.service';
 import { GameService } from '../../services/game.service';
 import { ChildCardComponent } from '../../components/child-card/child-card.component';
 import { ToastrService } from 'ngx-toastr';
-import { RouterModule } from '@angular/router';
+import { RouterModule,Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-child-dashboard',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, ChildCardComponent,RouterModule],
+  imports: [CommonModule,RouterModule, ReactiveFormsModule, FormsModule, ChildCardComponent],
   templateUrl: './child-dashboard.component.html',
   styleUrl: './child-dashboard.component.css'
 })
@@ -26,7 +27,9 @@ export class ChildDashboardComponent implements OnInit {
     private fb: FormBuilder,
     private childService: ChildService,
     private gameService: GameService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private http: HttpClient, 
+    private router: Router   
   ) {}
 
   ngOnInit() {
@@ -128,5 +131,21 @@ export class ChildDashboardComponent implements OnInit {
         error: () => this.toastr.error('Hiba történt a törlés közben.')
       });
     }
+  }
+  logout() {
+    this.http.post('http://localhost:8000/api/logout', {}, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    }).subscribe({
+      next: () => {
+        localStorage.removeItem('token');
+        this.router.navigate(['/']);
+        this.toastr.success('Sikeres kijelentkezés!');
+      },
+      error: () => {
+        this.toastr.error('Hiba történt kijelentkezés közben.');
+      }
+    });
   }
 }

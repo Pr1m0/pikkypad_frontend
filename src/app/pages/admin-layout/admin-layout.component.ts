@@ -18,14 +18,12 @@ export class AdminLayoutComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    // Idő frissítés
     setInterval(() => {
       const now = new Date();
       this.currentTime = now.toLocaleTimeString();
       this.currentDate = now.toLocaleDateString();
     }, 1000);
 
-    // Felhasználónév betöltés
     const token = localStorage.getItem('token');
     if (token) {
       this.auth.getCurrentUser().subscribe({
