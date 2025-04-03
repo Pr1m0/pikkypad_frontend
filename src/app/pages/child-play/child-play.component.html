@@ -1,6 +1,5 @@
 <div class="play-screen">
 
-    <!-- Felső rész: fejléc -->
     <div class="play-header">
       <div>
         <strong>{{ currentGame?.title }}</strong><br />
@@ -12,7 +11,6 @@
       </div>
     </div>
   
-    <!-- Középső rész: játék betöltése -->
     <div class="play-body">
       <ng-container *ngIf="isMemoryGame()">
         <app-memory-game></app-memory-game>
@@ -28,7 +26,6 @@
       </ng-container>
     </div>
   
-    <!-- Alsó rész: navigációs gombok -->
     <div class="play-controls">
       <button class="btn btn-outline-primary" (click)="previousGame()" [disabled]="currentGameIndex === 0">
         ◀ Előző

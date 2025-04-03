@@ -14,6 +14,10 @@
     <div class="mb-3">
       <label>Email</label>
       <input type="email" class="form-control" formControlName="email" placeholder="pl: pelda@email.hu">
+      <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="text-danger mt-1">
+        <div *ngIf="form.get('email')?.errors?.['required']">Az email cím megadása kötelező.</div>
+        <div *ngIf="form.get('email')?.errors?.['email']">Érvénytelen email formátum.</div>
+      </div>
       <div *ngIf="errorMessages.email" class="text-danger mt-1">
         <div *ngFor="let msg of errorMessages.email">{{ msg }}</div>
       </div>
