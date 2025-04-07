@@ -45,14 +45,21 @@ export class LoginComponent {
             },
             error: (err) => {
               console.error('Nem sikerült lekérni a felhasználót:', err);
-              this.toastr.error('Bejelentkezés sikerült, de a navigáció hibás.');
+              this.toastr.error('Bejelentkezés sikerült, de a jogosultsági adatok lekérése hibás.');
               this.router.navigate(['/home-private']);
             }
           });
         },
         error: (err) => {
           console.error('Bejelentkezési hiba:', err);
-          this.toastr.error('Hibás email vagy jelszó!');
+  
+          if (err.status === 401 && err.error?.errorMessage) {
+            this.toastr.error(err.error.errorMessage);
+          } else if (err.status === 422 && err.error?.error) {
+            this.toastr.warning('Hibás adatbevitel! Kérlek, ellenőrizd az űrlapot.');
+          } else {
+            this.toastr.error('Hibás email vagy jelszó!');
+          }
         }
       });
     } else {
