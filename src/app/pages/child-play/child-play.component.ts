@@ -19,6 +19,7 @@ export class ChildPlayComponent implements OnInit {
   currentGameIndex = 0;
   timer: number = 60 * 60;
   intervalId: any;
+  private timerStarted = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +42,7 @@ export class ChildPlayComponent implements OnInit {
           this.toastr.info('Nincs játék hozzárendelve a gyermekhez.');
         } else {
           this.startTimer();
+          this.timerStarted = true;
           console.log('Lekért játékok:', this.games);
         }
       },

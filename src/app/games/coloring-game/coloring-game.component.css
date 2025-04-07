@@ -17,4 +17,19 @@
     max-width: 500px;
     border: 1px solid #ccc;
   }
+  button {
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    background-color: #303cdd;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(10, 10, 10, 0.1);
+  }
   
+  button:hover {
+    background-color: #45a049;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  }

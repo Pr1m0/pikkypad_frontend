@@ -16,4 +16,7 @@ export class ColoringGameComponent {
   onColorClick(pathId: string): void {
     this.selectedColors[pathId] = this.selectedColor;
   }
+  restartGame(): void {
+    this.selectedColors = {};
+  }
 }
