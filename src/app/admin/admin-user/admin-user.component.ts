@@ -38,23 +38,23 @@ export class AdminUserComponent implements OnInit {
     });
   }
 
-  deleteUser(id: number) {
-    if (confirm('Biztos törölni akarod ezt a felhasználót?')) {
-      this.adminService.deleteUser(id).subscribe({
-        next: (res: any) => {
-          if (res.success) {
-            this.toastr.success(res.message);
-            this.loadUsers();
-          } else {
-            this.toastr.error(res.message);
-          }
-        },
-        error: () => {
-          this.toastr.error('Hiba történt a felhasználó törlése során!');
-        }
-      });
-    }
-  }
+  // deleteUser(id: number) {
+  //   if (confirm('Biztos törölni akarod ezt a felhasználót?')) {
+  //     this.adminService.deleteUser(id).subscribe({
+  //       next: (res: any) => {
+  //         if (res.success) {
+  //           this.toastr.success(res.message);
+  //           this.loadUsers();
+  //         } else {
+  //           this.toastr.error(res.message);
+  //         }
+  //       },
+  //       error: () => {
+  //         this.toastr.error('Hiba történt a felhasználó törlése során!');
+  //       }
+  //     });
+  //   }
+  // }
 
   promoteUser(id: number) {
     if (confirm('Biztos adminná akarod léptetni ezt a felhasználót?')) {

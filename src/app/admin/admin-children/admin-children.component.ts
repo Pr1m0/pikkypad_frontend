@@ -33,17 +33,17 @@ export class AdminChildrenComponent implements OnInit {
     });
   }
 
-  deleteChild(id: number) {
-    if (confirm('Biztosan törlöd ezt a gyermeket?')) {
-      this.adminService.deleteChild(id).subscribe({
-        next: (res: any) => {
-          this.toastr.success(res.message || 'Gyermek törölve.');
-          this.loadChildren();
-        },
-        error: () => {
-          this.toastr.error('Hiba történt a törlés közben.');
-        }
-      });
-    }
-  }
+  // deleteChild(id: number) {
+  //   if (confirm('Biztosan törlöd ezt a gyermeket?')) {
+  //     this.adminService.deleteChild(id).subscribe({
+  //       next: (res: any) => {
+  //         this.toastr.success(res.message || 'Gyermek törölve.');
+  //         this.loadChildren();
+  //       },
+  //       error: () => {
+  //         this.toastr.error('Hiba történt a törlés közben.');
+  //       }
+  //     });
+  //   }
+  // }
 }

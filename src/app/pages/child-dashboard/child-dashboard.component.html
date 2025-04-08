@@ -23,11 +23,11 @@
           </div>
         </div>
         <div class="col-md-2">
-          <input type="number" class="form-control" placeholder="Kor (3-9)" formControlName="age" min="3" max="9" />
+          <input type="number" class="form-control" placeholder="Kor (3-5)" formControlName="age" min="3" max="5" />
           <div *ngIf="childForm.get('age')?.touched && childForm.get('age')?.invalid" class="text-danger small mt-1">
             <div *ngIf="childForm.get('age')?.errors?.['required']">A kor megadása kötelező.</div>
             <div *ngIf="childForm.get('age')?.errors?.['min']">Min. életkor: 3 év.</div>
-            <div *ngIf="childForm.get('age')?.errors?.['max']">Max. életkor: 9 év.</div>
+            <div *ngIf="childForm.get('age')?.errors?.['max']">Max. életkor: 5 év.</div>
           </div>
         </div>
         <div class="col-md-auto">
